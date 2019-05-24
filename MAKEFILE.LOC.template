@@ -1,0 +1,9 @@
+# Copy this file to "MAKEFILE.LOC". 
+# MAKEFILE.LOC is included from the main MAKEFILE.
+# It should contain definitions, which are specific to the developer and/or his local machine,
+# such as paths to local tools etc.
+# MAKEFILE.LOC should not be versioned in versioning systems (such as SVN or GIT), as it differs
+# for every single developer working on the project.
+
+# Path to local turboc installation (inside DOSbox).
+TCCDIR=C:\turboc

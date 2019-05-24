@@ -1,0 +1,38 @@
+# add developer's local environment, such as TurboC installation path
+!include MAKEFILE.LOC
+
+# TurboC compiler path
+CC=$(TCCDIR)\bin\tcc.exe
+
+# compiler options - do not forget to add your own include paths using multiple -I<path>
+CFLAGS=-1 -mc -g3 -j3 -G -d -O2 -Z -I$(TCCDIR)\include -Isrc -Isrc\test
+
+# TurboC linker path
+TL=$(TCCDIR)\bin\tlink.exe
+
+# all objects to be compiled (without directory path; all filenames must be 
+# unique, regardless of where in the source tree they are located)
+OBJS=\
+test.obj \
+main.obj
+
+# default rule and resulting EXE filename
+start.exe: $(OBJS)
+    $(TL) /L$(TCCDIR)\lib /x @&&! 
+c0c $(OBJS) 
+$*
+$*
+cc
+!
+
+# implicit rules to compile sources
+# every source directory must have it's own rule, such as "src\test" here
+# you can even go outside current project, like "..\..\common" etc.
+{src}.c.obj:
+    $(CC) $(CFLAGS) -c $<
+{src\test}.c.obj:
+    $(CC) $(CFLAGS) -c $<
+    
+# clean obj files
+clean:
+    del *.obj
